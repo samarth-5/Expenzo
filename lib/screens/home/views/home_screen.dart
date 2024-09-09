@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:expenzo/screens/home/views/main_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                   Theme.of(context).colorScheme.secondary,
                   Theme.of(context).colorScheme.primary,
                 ],
-                //transform: const GradientRotation(pi / 4),
+                transform: const GradientRotation(pi / 4),
               )),
           child: const Icon(CupertinoIcons.add),
         ),
