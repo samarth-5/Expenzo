@@ -1,3 +1,4 @@
+import 'package:expenzo/screens/home/views/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class AppView extends StatelessWidget {
@@ -5,6 +6,18 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return MaterialApp(
+      title: "Expenzo",
+      theme: ThemeData(
+        colorScheme: ColorScheme.light(
+          background: Colors.grey.shade100,
+          onBackground: Colors.black,
+          primary: Color(0xFF00B2E7),
+          secondary: Color(0xFFE064F7),
+          tertiary: Color(0xFFFF8D6C),
+        )
+      ),
+      home: HomeScreen(),
+    );
   }
 }
