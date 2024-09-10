@@ -24,7 +24,7 @@ class StatsScreen extends StatelessWidget {
             const SizedBox(height: 20,),
             Container(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.width ,
               //color: Colors.red,
               decoration: BoxDecoration(
                 color: Colors.white,

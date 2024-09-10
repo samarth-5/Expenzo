@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:expenzo/screens/add_expense/views/add_expense.dart';
 import 'package:expenzo/screens/home/views/main_screen.dart';
 import 'package:expenzo/screens/stats/stats_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -70,7 +71,14 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) => const AddExpense(),
+            ),
+          );
+        },
         shape: const CircleBorder(),
         child: Container(
           width: 60,
