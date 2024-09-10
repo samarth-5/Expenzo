@@ -25,9 +25,9 @@ class _ChartState extends State<Chart> {
         toY: y,
         gradient: LinearGradient(
           colors: [
-            Theme.of(context).colorScheme.tertiary,
-            Theme.of(context).colorScheme.secondary,
             Theme.of(context).colorScheme.primary,
+            Theme.of(context).colorScheme.secondary,
+            Theme.of(context).colorScheme.tertiary,
           ],
           transform: const GradientRotation(pi / 4),
         ),
@@ -75,7 +75,7 @@ class _ChartState extends State<Chart> {
         ),
         leftTitles: AxisTitles(
           sideTitles: SideTitles(
-            showTitles: false,
+            showTitles: true,
             reservedSize: 38,
             getTitlesWidget: leftTitles,
           ),
@@ -190,15 +190,15 @@ class _ChartState extends State<Chart> {
     );
     String text;
     if (value == 0)
-      text = '\$ 1K';
+      text = '\u{20B9}1K';
     else if (value == 2)
-      text = '\$ 2K';
+      text = '\u{20B9}2K';
     else if (value == 3)
-      text = '\$ 3K';
+      text = '\u{20B9}3K';
     else if (value == 4)
-      text = '\$ 4K';
+      text = '\u{20B9}4K';
     else if (value == 5)
-      text = '\$ 5K';
+      text = '\u{20B9}5K';
     else
       return Container();
 
