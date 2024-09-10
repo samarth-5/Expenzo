@@ -12,7 +12,23 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int idx=0;
+  int idx = 0;
+  late Color selectedItem = Colors.blue;
+  Color unselectedItem = Colors.grey;
+
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   selectedItem = Theme.of(context).colorScheme.primary;
+  //   super.initState();
+  // }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Now it's safe to use Theme.of(context)
+    selectedItem = Theme.of(context).colorScheme.primary;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,23 +39,30 @@ class _HomeScreenState extends State<HomeScreen> {
           top: Radius.circular(30),
         ),
         child: BottomNavigationBar(
-          onTap: (val){
+          onTap: (val) {
             //print(val);
             setState(() {
-              idx=val;
+              idx = val;
             });
           },
-          backgroundColor: Colors.white,
+          //selectedItemColor: Colors.red,
+          //backgroundColor: Colors.white,
           showSelectedLabels: false,
           showUnselectedLabels: false,
           elevation: 3,
-          items: const [
+          items: [
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.home),
+              icon: Icon(
+                CupertinoIcons.home,
+                color: idx == 0 ? selectedItem : unselectedItem,
+              ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.graph_square_fill),
+              icon: Icon(
+                CupertinoIcons.graph_square_fill,
+                color: idx == 1 ? selectedItem : unselectedItem,
+              ),
               label: 'Stats',
             )
           ],
@@ -53,19 +76,20 @@ class _HomeScreenState extends State<HomeScreen> {
           width: 60,
           height: 60,
           decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: LinearGradient(
-                colors: [
-                  Theme.of(context).colorScheme.tertiary,
-                  Theme.of(context).colorScheme.secondary,
-                  Theme.of(context).colorScheme.primary,
-                ],
-                transform: const GradientRotation(pi / 4),
-              )),
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              colors: [
+                Theme.of(context).colorScheme.tertiary,
+                Theme.of(context).colorScheme.secondary,
+                Theme.of(context).colorScheme.primary,
+              ],
+              transform: const GradientRotation(pi / 4),
+            ),
+          ),
           child: const Icon(CupertinoIcons.add),
         ),
       ),
-      body: idx==0 ? MainScreen() : StatsScreen(),
+      body: idx == 0 ? MainScreen() : StatsScreen(),
     );
   }
 }
