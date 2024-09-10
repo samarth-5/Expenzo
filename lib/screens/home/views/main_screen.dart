@@ -63,11 +63,11 @@ class MainScreen extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: Icon(CupertinoIcons.settings),
+                  icon: const Icon(CupertinoIcons.settings),
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Container(
@@ -272,7 +272,7 @@ class MainScreen extends StatelessWidget {
                                     // ),
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 12,
                                 ),
                                 Text(
