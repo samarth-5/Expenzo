@@ -1,4 +1,4 @@
-import 'package:expenses_repo/src/entities/category_entity.dart';
+import 'package:expense_repository/src/entities/category_entity.dart';
 
 class Category {
   String categoryId;
