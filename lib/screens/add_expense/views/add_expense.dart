@@ -1,3 +1,5 @@
+import 'package:expense_repository/expense_repository.dart';
+import 'package:expenzo/screens/add_expense/blocs/create_expensebloc/create_expense_bloc.dart';
 import 'package:expenzo/screens/add_expense/blocs/get_categorybloc/get_categories_bloc.dart';
 import 'package:expenzo/screens/add_expense/views/category_creation.dart';
 import 'package:flutter/material.dart';
@@ -17,11 +19,12 @@ class _AddExpenseState extends State<AddExpense> {
   TextEditingController categoryController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   DateTime selectDate = DateTime.now();
+  late Expense expense;
 
   @override
   void initState() {
-    // TODO: implement initState
     dateController.text = DateFormat('dd/MM /yyyy').format(DateTime.now());
+    expense = Expense.empty;
     super.initState();
   }
 
@@ -82,15 +85,23 @@ class _AddExpenseState extends State<AddExpense> {
                       onTap: () {},
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: Colors.white,
-                        prefixIcon: const Icon(
-                          FontAwesomeIcons.list,
-                          size: 16,
-                          color: Colors.grey,
-                        ),
+                        fillColor: expense.category == Category.empty
+                            ? Colors.white
+                            : Color(expense.category.color),
+                        prefixIcon: expense.category == Category.empty
+                            ? const Icon(
+                                FontAwesomeIcons.list,
+                                size: 16,
+                                color: Colors.grey,
+                              )
+                            : Image.asset(
+                                'assets/${expense.category.icon}.png',
+                                scale: 4,
+                              ),
                         suffixIcon: IconButton(
                           onPressed: () async {
-                            var newCategory = await getCategoryCreation(context);
+                            var newCategory =
+                                await getCategoryCreation(context);
                             //print(newCategory);
                             setState(() {
                               state.categories.insert(0, newCategory);
@@ -127,6 +138,13 @@ class _AddExpenseState extends State<AddExpense> {
                           itemBuilder: (context, int i) {
                             return Card(
                               child: ListTile(
+                                onTap: () {
+                                  setState(() {
+                                    expense.category = state.categories[i];
+                                    categoryController.text =
+                                        expense.category.name;
+                                  });
+                                },
                                 leading: Image.asset(
                                   'assets/${state.categories[i].icon}.png',
                                   scale: 6,
@@ -152,7 +170,7 @@ class _AddExpenseState extends State<AddExpense> {
                       onTap: () async {
                         DateTime? newDate = await showDatePicker(
                           context: context,
-                          initialDate: selectDate,
+                          initialDate: expense.date,
                           firstDate: DateTime.now(),
                           lastDate:
                               DateTime.now().add(const Duration(days: 365)),
@@ -161,7 +179,8 @@ class _AddExpenseState extends State<AddExpense> {
                           setState(() {
                             dateController.text =
                                 DateFormat('dd/MM /yyyy').format(newDate);
-                            selectDate = newDate;
+                            //selectDate = newDate;
+                            expense.date=newDate;
                           });
                         }
                       },
@@ -187,7 +206,12 @@ class _AddExpenseState extends State<AddExpense> {
                       width: double.infinity,
                       height: kToolbarHeight,
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            expense.amount = int.parse(expenseController.text);
+                          });
+                          context.read()<CreateExpenseBloc>().add(CreateExpense(expense));
+                        },
                         style: TextButton.styleFrom(
                           backgroundColor: Colors.black,
                           shape: RoundedRectangleBorder(

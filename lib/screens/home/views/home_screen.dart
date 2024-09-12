@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:expense_repository/expense_repository.dart';
 import 'package:expenzo/screens/add_expense/blocs/create_categorybloc/create_category_bloc.dart';
+import 'package:expenzo/screens/add_expense/blocs/create_expensebloc/create_expense_bloc.dart';
 import 'package:expenzo/screens/add_expense/blocs/get_categorybloc/get_categories_bloc.dart';
 import 'package:expenzo/screens/add_expense/views/add_expense.dart';
 import 'package:expenzo/screens/home/views/main_screen.dart';
@@ -79,6 +80,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   BlocProvider(
                     create: (context) => GetCategoriesBloc(FirebaseExpense())..add(GetCategories()),
+                  ),
+                  BlocProvider(
+                    create: (context) => CreateExpenseBloc(FirebaseExpense()),
                   ),
                 ],
                 child: const AddExpense(),
