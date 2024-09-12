@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:expense_repository/expense_repository.dart';
 import 'package:expenzo/screens/add_expense/blocs/create_categorybloc/create_category_bloc.dart';
+import 'package:expenzo/screens/add_expense/blocs/get_categorybloc/get_categories_bloc.dart';
 import 'package:expenzo/screens/add_expense/views/add_expense.dart';
 import 'package:expenzo/screens/home/views/main_screen.dart';
 import 'package:expenzo/screens/stats/stats_screen.dart';
@@ -19,13 +20,6 @@ class _HomeScreenState extends State<HomeScreen> {
   int idx = 0;
   late Color selectedItem = Colors.blue;
   Color unselectedItem = Colors.grey;
-
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   selectedItem = Theme.of(context).colorScheme.primary;
-  //   super.initState();
-  // }
 
   @override
   void didChangeDependencies() {
@@ -78,10 +72,15 @@ class _HomeScreenState extends State<HomeScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (BuildContext context) => BlocProvider(
-                create: (context) => CreateCategoryBloc(
-                  FirebaseExpense()
-                ),
+              builder: (BuildContext context) => MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create: (context) => CreateCategoryBloc(FirebaseExpense()),
+                  ),
+                  BlocProvider(
+                    create: (context) => GetCategoriesBloc(FirebaseExpense())..add(GetCategories()),
+                  ),
+                ],
                 child: const AddExpense(),
               ),
             ),

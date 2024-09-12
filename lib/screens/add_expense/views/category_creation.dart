@@ -229,11 +229,11 @@ getCategoryCreation(BuildContext context) {
                                   category.categoryId = const Uuid().v1();
                                   category.name = categoryNameController.text;
                                   category.icon = iconSelected;
-                                  category.color = categoryColor.toString();
+                                  category.color = categoryColor.value;
                                   context
                                       .read<CreateCategoryBloc>()
                                       .add(CreateCategory(category));
-                                  //Navigator.pop(context);
+                                  Navigator.pop(context);
                                 },
                                 style: TextButton.styleFrom(
                                   backgroundColor: Colors.black,
