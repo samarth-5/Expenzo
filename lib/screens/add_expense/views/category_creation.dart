@@ -140,7 +140,7 @@ Future getCategoryCreation(BuildContext context) {
                                             image: AssetImage(
                                               'assets/${myCategoryIcons[i]}.png',
                                             ),
-                                            //scale: 20,
+                                            scale: 5,
                                           ),
                                         ),
                                       ),
