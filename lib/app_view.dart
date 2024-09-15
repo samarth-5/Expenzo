@@ -12,12 +12,12 @@ class AppView extends StatelessWidget {
     return MaterialApp(
       title: "Expenzo",
       theme: ThemeData(
-          colorScheme: ColorScheme.light(
-              background: Colors.grey.shade100,
-              onBackground: Colors.black,
-              primary: const Color(0xFF00B2E7),
-              secondary: const Color(0xFFE064F7),
-              tertiary: const Color(0xFFFF8D6C),
+          colorScheme: const ColorScheme.light(
+              surface:  Color.fromARGB(255, 223, 207, 207),
+              onSurface: Colors.black,
+              primary:  Color(0xFF00B2E7),
+              secondary:  Color(0xFFE064F7),
+              tertiary: Color(0xFFFF8D6C),
               outline: Colors.grey)),
       home: BlocProvider(
         create: (context) => GetExpensesBloc(
